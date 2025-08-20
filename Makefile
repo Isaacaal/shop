@@ -1,24 +1,37 @@
+EXEC=docker compose exec
+EXEC_WD=$(EXEC) -u www-data app
+EXEC_ROOT=$(EXEC) app
+
 start:
 	docker compose up -d --build
 
 stop:
-	docker compose down
+	docker compose down -v
 
-install: start migrate fixtures assets
+install: start composer-install migrate fixtures
+
+composer-install:
+	$(EXEC_WD) composer install --no-interaction --prefer-dist
 
 migrate:
-	docker compose exec app php bin/console doctrine:database:create --if-not-exists || true
-	docker compose exec app php bin/console doctrine:migrations:migrate --no-interaction
+	$(EXEC_WD) php bin/console doctrine:database:create --if-not-exists || true
+	$(EXEC_WD) php bin/console doctrine:migrations:migrate -n
 
 fixtures:
-	docker compose exec app php bin/console doctrine:fixtures:load --no-interaction || true
-
-assets:
-	npm install || true
-	npm run build || true
+	$(EXEC_WD) php bin/console doctrine:fixtures:load -n || true
 
 tests:
-	docker compose exec app php bin/phpunit
+	$(EXEC_WD) php bin/phpunit
+
+reset-db:
+	$(EXEC_WD) rm -f var/data.db || true
+	$(EXEC_WD) php bin/console doctrine:database:create --if-not-exists
+	$(EXEC_WD) php bin/console doctrine:migrations:migrate -n
+	$(EXEC_WD) php bin/console doctrine:fixtures:load -n
+
+fix-perms:
+	$(EXEC_ROOT) chown -R www-data:www-data /var/www/var
+	$(EXEC_ROOT) chmod -R 775 /var/www/var
 
 bash:
-	docker compose exec app bash
+	$(EXEC_ROOT) bash
