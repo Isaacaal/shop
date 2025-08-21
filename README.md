@@ -11,6 +11,8 @@ Fonctionnalités principales :
 - Tests unitaires et fonctionnels
 - Docker & Makefile pour une installation rapide
 - Front en Bootstrap via Webpack Encore
+- API (API Platform) exposant les produits en JSON
+- Export CSV de tous les produits via une commande console
 
 ---
 
@@ -21,6 +23,8 @@ Fonctionnalités principales :
 - [🚀 Lancer le projet](#-lancer-le-projet)
 - [🧪 Lancer les tests](#-lancer-les-tests)
 - [🔑 Accès à l’administration](#-accès-à-ladministration)
+- [🌐 API (produits en JSON)](#-api-produits-en-json)
+- [📊 Export CSV des produits](#-export-csv-des-produits)
 - [📂 Structure du projet](#-structure-du-projet)
 
 ---
@@ -112,6 +116,31 @@ Connexion à l’espace d’administration EasyAdmin :
 
 - **Utilisateur** : \`admin\`  
 - **Mot de passe** : \`password\`  
+
+---
+
+## 🌐 API (produits en JSON)
+
+Une API est disponible
+
+📍 Liste des produits en JSON :
+http://localhost:8000/api/products
+
+---
+
+## 📊 Export CSV des produits
+
+Une commande permet d’exporter l’ensemble des produits dans un fichier CSV :
+
+```
+docker compose exec -u www-data app php bin/console app:export:products-csv
+```
+
+Le fichier est généré dans :
+
+```
+var/export/products_YYYYmmdd_HHMMSS.csv
+```
 
 ---
 
