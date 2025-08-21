@@ -26,6 +26,9 @@ class Product
     #[ORM\Column(unique: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __toString(): string
     {
         return $this->name;
@@ -39,7 +42,7 @@ class Product
 
         return $this;
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,5 +94,13 @@ class Product
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function getImage(): ?string {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self {
+        $this->image = $image; return $this;
     }
 }

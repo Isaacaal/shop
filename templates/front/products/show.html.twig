@@ -7,6 +7,10 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h1 class="card-title">{{ product.name }}</h1>
+
+                        {% if product.image %}
+                            <img src="{{ asset('uploads/' ~ product.image) }}" class="img-fluid mb-3" alt="{{ product.name }}">
+                        {% endif %}
                         <p class="card-text text-muted">
                             {{ product.description }}
                         </p>
