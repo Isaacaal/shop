@@ -22,8 +22,10 @@ composer-install:
 	$(EXEC_WD) composer install --no-interaction --prefer-dist
 
 migrate:
-	$(EXEC_WD) php bin/console doctrine:database:create --if-not-exists || true
-	$(EXEC_WD) php bin/console doctrine:migrations:migrate -n
+	-$(EXEC_WD) php bin/console doctrine:database:create --if-not-exists
+	-$(EXEC_WD) php bin/console doctrine:migrations:migrate -n
+	$(EXEC_WD) php bin/console doctrine:schema:update --force --complete
+
 
 fixtures:
 	$(EXEC_WD) php bin/console doctrine:fixtures:load -n || true
