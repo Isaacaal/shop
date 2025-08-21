@@ -20,8 +20,8 @@ migrate:
 fixtures:
 	$(EXEC_WD) php bin/console doctrine:fixtures:load -n || true
 
-tests:
-	$(EXEC_WD) php bin/phpunit
+test:
+	docker compose exec -u www-data -e APP_ENV=test app php bin/phpunit
 
 reset-db:
 	$(EXEC_WD) rm -f var/data.db || true

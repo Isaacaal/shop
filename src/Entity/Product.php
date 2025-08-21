@@ -31,6 +31,15 @@ class Product
         return $this->name;
     }
 
+    public function setId(int $id): self
+    {
+        $ref = new \ReflectionProperty(self::class, 'id');
+        $ref->setAccessible(true);
+        $ref->setValue($this, $id);
+
+        return $this;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
