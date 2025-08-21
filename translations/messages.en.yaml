@@ -1,0 +1,19 @@
+nav:
+  home: "Home"
+  products: "Products"
+  cart: "Cart"
+
+footer.rights: "All rights reserved."
+home.welcome: "Welcome to my website"
+product.add_to_cart: "Add to cart"
+product.back_to_list: "Back to products"
+
+cart.title: "Your cart"
+cart.clear: "Clear cart"
+cart.remove: "Remove"
+cart.product: "Product"
+cart.qty: "Qty"
+cart.price: "Price"
+cart.subtotal: "Subtotal"
+cart.total: "Total"
+cart.empty: "Your cart is empty."

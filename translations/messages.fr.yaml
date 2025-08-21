@@ -1,0 +1,19 @@
+nav:
+  home: "Accueil"
+  products: "Produits"
+  cart: "Panier"
+
+footer.rights: "Tous droits réservés."
+home.welcome: "Bienvenue sur mon site"
+product.add_to_cart: "Ajouter au panier"
+product.back_to_list: "Retour aux produits"
+
+cart.title: "Votre panier"
+cart.clear: "Vider le panier"
+cart.remove: "Supprimer"
+cart.product: "Produit"
+cart.qty: "Qté"
+cart.price: "Prix"
+cart.subtotal: "Sous-total"
+cart.total: "Total"
+cart.empty: "Votre panier est vide."

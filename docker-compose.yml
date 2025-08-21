@@ -13,7 +13,7 @@ services:
       DATABASE_URL: "sqlite:////var/www/var/data.db"
     volumes:
       - .:/var/www:delegated      # code source
-      - var_data:/var/www/var     # var/ (db, cache, logs) en volume
+      - ./var:/var/www/var        # var/ (db, cache, logs) bind-mount sur l'hôte
     entrypoint: ["/entrypoint.sh"]
 
   node:
@@ -22,6 +22,3 @@ services:
     volumes:
       - .:/var/www:delegated
     command: sh -c "yarn install && yarn encore dev --watch"
-
-volumes:
-  var_data:

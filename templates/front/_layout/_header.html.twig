@@ -1,19 +1,38 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ path('app_home') }}">MonSite</a>
+            <a class="navbar-brand" href="{{ path('app_home') }}">Shop - Test</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_products_list') }}">Produits</a></li>
                     <li class="nav-item">
-                        {{ render(path('cart_widget')) }}
-                        {# ou: {{ render(controller('App\\Controller\\CartWidgetController::header')) }} #}
+                        <a class="nav-link" href="{{ path('app_home') }}">
+                            {{ 'nav.home'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_products_list') }}">
+                            {{ 'nav.products'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {{ render(controller('App\\Controller\\Front\\Cart\\CartWidgetController::header')) }}
                     </li>
                 </ul>
+
+                <div class="btn-group ms-3">
+                    <a class="btn btn-sm btn-outline-light {% if app.request.locale == 'fr' %}active{% endif %}"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'lang': 'fr'})) }}">
+                        FR
+                    </a>
+                    <a class="btn btn-sm btn-outline-light {% if app.request.locale == 'en' %}active{% endif %}"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'lang': 'en'})) }}">
+                        EN
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

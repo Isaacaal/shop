@@ -1,7 +1,7 @@
 {% extends 'front/layout.html.twig' %}
 
 {% block content %}
-    <h1 class="mb-4">Bienvenue sur mon site</h1>
+    <h1 class="mb-4">{{ 'home.welcome'|trans }}</h1>
 
     {% include 'front/products/product_list.html.twig' %}
 {% endblock %}
