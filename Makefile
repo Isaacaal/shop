@@ -14,9 +14,9 @@ git-safe:
 	$(EXEC_ROOT) git config --system --add safe.directory /var/www || true
 
 fix-perms:
-	$(EXEC_ROOT) mkdir -p var vendor public/bundles public/uploads
-	$(EXEC_ROOT) chown -R www-data:www-data var vendor public
-	$(EXEC_ROOT) chmod -R 775 var vendor public
+	$(EXEC_ROOT) mkdir -p var vendor public/bundles public/uploads assets
+	$(EXEC_ROOT) chown -R www-data:www-data var vendor public assets
+	$(EXEC_ROOT) chmod -R 775 var vendor public assets
 
 composer-install:
 	$(EXEC_WD) composer install --no-interaction --prefer-dist
