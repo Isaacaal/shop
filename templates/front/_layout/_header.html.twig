@@ -9,6 +9,10 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_products_list') }}">Produits</a></li>
+                    <li class="nav-item">
+                        {{ render(path('cart_widget')) }}
+                        {# ou: {{ render(controller('App\\Controller\\CartWidgetController::header')) }} #}
+                    </li>
                 </ul>
             </div>
         </div>

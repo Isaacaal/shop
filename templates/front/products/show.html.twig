@@ -13,6 +13,10 @@
                         <p class="h4 text-primary">
                             {{ product.price|number_format(2, ',', ' ') }} €
                         </p>
+                        <form action="{{ path('app_cart_add', { id: product.id }) }}" method="get" class="d-flex gap-2 mt-3">
+                            <input type="number" min="1" name="qty" value="1" class="form-control" style="max-width: 120px;">
+                            <button class="btn btn-primary">Ajouter au panier</button>
+                        </form>
                         <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3">
                             ← Retour aux produits
                         </a>
