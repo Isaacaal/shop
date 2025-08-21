@@ -42,8 +42,10 @@
         "symfony/ux-turbo": "^2.29",
         "symfony/validator": "6.4.*",
         "symfony/web-link": "6.4.*",
+        "symfony/webpack-encore-bundle": "^2.3",
         "symfony/yaml": "6.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3.21",
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
@@ -96,6 +98,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
         "phpunit/phpunit": "^12.3",
         "symfony/browser-kit": "6.4.*",
         "symfony/css-selector": "6.4.*",

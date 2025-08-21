@@ -12,9 +12,16 @@ services:
       APP_ENV: dev
       DATABASE_URL: "sqlite:////var/www/var/data.db"
     volumes:
-      - .:/var/www:delegated      # code
+      - .:/var/www:delegated      # code source
       - var_data:/var/www/var     # var/ (db, cache, logs) en volume
     entrypoint: ["/entrypoint.sh"]
+
+  node:
+    image: node:20
+    working_dir: /var/www
+    volumes:
+      - .:/var/www:delegated
+    command: sh -c "yarn install && yarn encore dev --watch"
 
 volumes:
   var_data:

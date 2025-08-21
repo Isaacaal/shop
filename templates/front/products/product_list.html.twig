@@ -1,0 +1,7 @@
+<div class="row">
+    {% for product in products %}
+        {% include 'front/products/_product_item.html.twig' with { product: product } %}
+    {% else %}
+        <p>Aucun produit disponible.</p>
+    {% endfor %}
+</div>
