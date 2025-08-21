@@ -11,14 +11,12 @@ stop:
 install: start git-safe fix-perms composer-install migrate fixtures
 
 git-safe:
-	# Marque /var/www comme "safe directory" au niveau système (root), évite les soucis d'écriture du .gitconfig
 	$(EXEC_ROOT) git config --system --add safe.directory /var/www || true
 
 fix-perms:
-	# Prépare les dossiers et droits pour que www-data puisse écrire (vendor, var, uploads)
-	$(EXEC_ROOT) mkdir -p var vendor public/uploads
-	$(EXEC_ROOT) chown -R www-data:www-data var vendor public/uploads
-	$(EXEC_ROOT) chmod -R 775 var vendor public/uploads
+	$(EXEC_ROOT) mkdir -p var vendor public/bundles public/uploads
+	$(EXEC_ROOT) chown -R www-data:www-data var vendor public
+	$(EXEC_ROOT) chmod -R 775 var vendor public
 
 composer-install:
 	$(EXEC_WD) composer install --no-interaction --prefer-dist
