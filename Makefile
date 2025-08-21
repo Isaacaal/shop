@@ -1,6 +1,6 @@
 EXEC=docker compose exec
-EXEC_WD=$(EXEC) -u www-data app
-EXEC_ROOT=$(EXEC) app
+EXEC_WD=$(EXEC) -u www-data -w /var/www app
+EXEC_ROOT=$(EXEC) -w /var/www app
 
 start:
 	docker compose up -d --build
@@ -8,7 +8,10 @@ start:
 stop:
 	docker compose down -v
 
-install: start composer-install migrate fixtures
+install: start git-safe fix-perms composer-install migrate fixtures
+
+git-safe:
+	$(EXEC_WD) git config --global --add safe.directory /var/www
 
 composer-install:
 	$(EXEC_WD) composer install --no-interaction --prefer-dist
@@ -21,7 +24,7 @@ fixtures:
 	$(EXEC_WD) php bin/console doctrine:fixtures:load -n || true
 
 test:
-	docker compose exec -u www-data -e APP_ENV=test app php bin/phpunit
+	$(EXEC) -u www-data -e APP_ENV=test -w /var/www app php bin/phpunit
 
 reset-db:
 	$(EXEC_WD) rm -f var/data.db || true
@@ -30,8 +33,9 @@ reset-db:
 	$(EXEC_WD) php bin/console doctrine:fixtures:load -n
 
 fix-perms:
-	$(EXEC_ROOT) chown -R www-data:www-data /var/www/var
-	$(EXEC_ROOT) chmod -R 775 /var/www/var
+	$(EXEC_ROOT) mkdir -p var vendor public/uploads
+	$(EXEC_ROOT) chown -R www-data:www-data var vendor public/uploads
+	$(EXEC_ROOT) chmod -R 775 var vendor public/uploads
 
 bash:
 	$(EXEC_ROOT) bash
